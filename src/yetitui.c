@@ -138,19 +138,16 @@ char getch() {
 }
 
 box_element* eputs(uint16_t x, uint16_t y, const char str[]) {
-	int i = x, j = 0;
-	box_element* ret  = (box_element*) malloc(strlen(str)*sizeof(box_element));
-	size_t       size = 0;
+	box_element* ret     = (box_element*) malloc(strlen(str)*sizeof(box_element));
+	box_element* pointer = ret + 1;
 	box_element  add;
-	for (; j<strlen(str); ++j) {
-		add.x       = i;
-		add.y       = y;
-		add.content = str[j];
-		*ret        = add;
-		++ i;
-		++ ret;
-		++ size;
+	int j = x;
+	for (int i = 0; i<strlen(str); ++i) {
+		add.x            = j;
+		add.y            = y;
+		add.content      = str[i];
+		*pointer         = add;
+		++ pointer;
 	}
-	ret -= size;
 	return ret;
 }
