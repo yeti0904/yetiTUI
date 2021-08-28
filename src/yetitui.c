@@ -44,41 +44,41 @@ void resetColour() {
 	printf("\x1b[0m");
 }
 
-void printBox(uint16_t x, uint16_t y, uint16_t w, uint16_t h) {
+void printBox(uint16_t x, uint16_t y, uint16_t w, uint16_t h, bool border) {
 	curs_move(x, y);
-	putchar('+');
+	if (border) putchar('+');
 	for (int i = 0; i < w - 2; ++i) {
-		putchar('-');
+		if (border) putchar('-');
 	}
-	putchar('+');
+	if (border) putchar('+');
 	for (int i = 0; i < h - 2; ++i) {
 		curs_move(x, y + i + 1);
-		putchar('|');
+		if (border) putchar('|');
 		for (int j = 0; j < w - 2; ++j) {
 			putchar(' ');
 		}
-		putchar('|');
+		if (border) putchar('|');
 	}
 	curs_move(x, y + h - 1);
-	putchar('+');
+	if (border) putchar('+');
 	for (int i = 0; i < w - 2; ++i) {
-		putchar('-');
+		if (border) putchar('-');
 	}
-	putchar('+');
+	if (border) putchar('+');
 }
 
-void printBoxWithElements(uint16_t x, uint16_t y, uint16_t w, uint16_t h, box_element elements[], size_t elementArraySize) {
+void printBoxWithElements(uint16_t x, uint16_t y, uint16_t w, uint16_t h, bool border, box_element elements[], size_t elementArraySize) {
 	bool elementInPlace;
 	char element;
 	curs_move(x, y);
-	putchar('+');
+	if (border) putchar('+');
 	for (int i = 0; i < w - 2; ++i) {
-		putchar('-');
+		if (border) putchar('-');
 	}
-	putchar('+');
+	if (border) putchar('+');
 	for (int i = 0; i < h - 2; ++i) {
 		curs_move(x, y + i + 1);
-		putchar('|');
+		if (border) putchar('|');
 		for (int j = 0; j < w - 2; ++j) {
 			elementInPlace = false;
 			for (int k = 0; k<elementArraySize; ++k) {
@@ -94,14 +94,14 @@ void printBoxWithElements(uint16_t x, uint16_t y, uint16_t w, uint16_t h, box_el
 				putchar(' ');
 			}
 		}
-		putchar('|');
+		if (border) putchar('|');
 	}
 	curs_move(x, y + h - 1);
-	putchar('+');
+	if (border) putchar('+');
 	for (int i = 0; i < w - 2; ++i) {
-		putchar('-');
+		if (border) putchar('-');
 	}
-	putchar('+');
+	if (border) putchar('+');
 }
 
 int getmaxy() {
@@ -149,5 +149,13 @@ box_element* eputs(uint16_t x, uint16_t y, const char str[]) {
 		*pointer         = add;
 		++ pointer;
 	}
+	return ret;
+}
+
+box_element createElement(uint16_t x, uint16_t y, char content) {
+	box_element ret;
+	ret.x       = x;
+	ret.y       = y;
+	ret.content = content;
 	return ret;
 }
