@@ -149,6 +149,7 @@ box_element* eputs(uint16_t x, uint16_t y, const char str[]) {
 		*pointer         = add;
 		++ pointer;
 	}
+	free(pointer);
 	return ret;
 }
 
@@ -157,5 +158,49 @@ box_element createElement(uint16_t x, uint16_t y, char content) {
 	ret.x       = x;
 	ret.y       = y;
 	ret.content = content;
+	return ret;
+}
+
+box_element* ePrintBox(uint16_t x, uint16_t y, uint16_t w, uint16_t h, bool border) {
+	box_element* ret = (box_element*) malloc(w*h*sizeof(box_element));
+	box_element* pointer = ret + 1;
+	for (int i = y; i<h+y; ++i) {
+		for (int j = x; j<=w+x; ++i) {
+			if (i == y) {
+				if (((j == x) || (j == x+w)) && ((i == y) || i == y+h)) {
+					if (border) {
+						*pointer = createElement(j, i, '+');
+						++ pointer;
+					}
+					else {
+						*pointer = createElement(j, i, ' ');
+					}
+				}
+				else if ((j == x) || (j == x+w)) {
+					if (border) {
+						*pointer = createElement(j, i, '|');
+						++ pointer;
+					}
+					else {
+						*pointer = createElement(j, i, ' ');
+					}
+				}
+				else if ((i == y) || (i == y+h)) {
+					if (border) {
+						*pointer = createElement(j, i, '-');
+						++ pointer;
+					}
+					else {
+						*pointer = createElement(j, i, ' ');
+					}
+				}
+				else {
+					*pointer = createElement(j, i, ' ');
+					++ pointer;
+				}
+			}
+		}
+	}
+	free(pointer);
 	return ret;
 }
