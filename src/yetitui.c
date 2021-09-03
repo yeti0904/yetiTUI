@@ -88,10 +88,10 @@ void printBoxWithElements(uint16_t x, uint16_t y, uint16_t w, uint16_t h, bool b
 				}
 			}
 			if (elementInPlace) {
-				putchar(element);
+				if (border) putchar(element);
 			}
 			else {
-				putchar(' ');
+				if (border) putchar(' ');
 			}
 		}
 		if (border) putchar('|');
@@ -148,8 +148,8 @@ box_element* eputs(uint16_t x, uint16_t y, const char str[]) {
 		add.content      = str[i];
 		*pointer         = add;
 		++ pointer;
+		++ j;
 	}
-	free(pointer);
 	return ret;
 }
 
