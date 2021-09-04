@@ -21,5 +21,5 @@ char getch();
 box_element* eputs(uint16_t x, uint16_t y, const char str[]);
 box_element createElement(uint16_t x, uint16_t y, char content);
 box_element* ePrintBox(uint16_t x, uint16_t y, uint16_t w, uint16_t h, bool border);
-void endscr(int a)
+void endscr(int a);
 void initscr();
