@@ -1,4 +1,5 @@
 #pragma once
+// colours
 #define FORE_BLACK   30
 #define FORE_RED     31
 #define FORE_GREEN   32
@@ -15,3 +16,12 @@
 #define BACK_MAGENTA 45
 #define BACK_CYAN    46
 #define BACK_WHITE   47
+
+// styles
+#define STYLE_RESET         0
+#define STYLE_BOLD_ON       1
+#define STYLE_UNDERLINE_ON  2
+#define STYLE_INVERSE_ON    3
+#define STYLE_BOLD_OFF      21
+#define STYLE_UNDERLINE_OFF 24
+#define STYLE_INVERSE_OFF   27

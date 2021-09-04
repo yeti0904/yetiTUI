@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <sys/ioctl.h>
 #include <string.h>
+#include <signal.h>
 #include "yetitui_element.h"
 
 static struct termios orig_termios;
@@ -38,10 +39,6 @@ void setColour(uint8_t colour) {
 
 void setColourBright(uint8_t colour) {
 	printf("\x1b[%i;1m", colour);
-}
-
-void resetColour() {
-	printf("\x1b[0m");
 }
 
 void printBox(uint16_t x, uint16_t y, uint16_t w, uint16_t h, bool border) {
@@ -203,4 +200,15 @@ box_element* ePrintBox(uint16_t x, uint16_t y, uint16_t w, uint16_t h, bool bord
 	}
 	free(pointer);
 	return ret;
+}
+
+void endscr(int a) {
+	scr_clear();
+	curs_move(1, 1);
+	showCursor(true);
+	disMode_raw();
+}
+
+void initscr() {
+	signal(SIGINT, endscr);
 }
