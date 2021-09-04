@@ -207,6 +207,7 @@ void endscr(int a) {
 	curs_move(1, 1);
 	showCursor(true);
 	disMode_raw();
+	exit(0);
 }
 
 void initscr() {
