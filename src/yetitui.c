@@ -214,14 +214,36 @@ box_element* ePrintBox(uint16_t x, uint16_t y, uint16_t w, uint16_t h, bool bord
 	return ret;
 }
 
-void endscr(int a) {
+void endscr(int hi) {
 	scr_clear();
 	curs_move(1, 1);
 	showCursor(true);
+	resetColour();
+	disMode_raw();
+	exit(0);
+}
+
+void endscrexit(void) {
+	scr_clear();
+	curs_move(1, 1);
+	showCursor(true);
+	resetColour();
 	disMode_raw();
 	exit(0);
 }
 
 void initscr() {
 	signal(SIGINT, endscr);
+	atexit(endscrexit);
+}
+
+void drawRect(uint16_t x, uint16_t y, uint16_t w, uint16_t h, char fill) {
+	int mx = 0, my = 0;
+	for (int i = x; i<+x+w; ++i) {
+		for (int j = y; j<h+y; ++i) {
+			curs_move(i, j);
+			putchar(fill);
+		}
+		putchar(10);
+	}
 }
