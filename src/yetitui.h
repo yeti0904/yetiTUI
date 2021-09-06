@@ -11,6 +11,8 @@ void curs_move(uint16_t x, uint16_t y);
 void scr_clear();
 void setColour(uint8_t colour);
 void setColourBright(uint8_t colour);
+void setColourForeRGB(uint8_t r, uint8_t g, uint8_t b);
+void setColourBackRGB(uint8_t r, uint8_t g, uint8_t b);
 void resetColour();
 void printBox(uint16_t x, uint16_t y, uint16_t w, uint16_t h, bool border);
 void printBoxWithElements(uint16_t x, uint16_t y, uint16_t w, uint16_t h, bool border, box_element elements[], size_t elementArraySize);

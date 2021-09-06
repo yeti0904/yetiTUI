@@ -41,6 +41,14 @@ void setColourBright(uint8_t colour) {
 	printf("\x1b[%i;1m", colour);
 }
 
+void setColourForeRGB(uint8_t r, uint8_t g, uint8_t b) {
+	printf("\x1b[38;2;%i;%i;%im", r, g, b);
+}
+
+void setColourBackRGB(uint8_t r, uint8_t g, uint8_t b) {
+	printf("\x1b[48;2;%i;%i;%im", r, g, b);
+}
+
 void printBox(uint16_t x, uint16_t y, uint16_t w, uint16_t h, bool border) {
 	curs_move(x, y);
 	if (border) putchar('+');
